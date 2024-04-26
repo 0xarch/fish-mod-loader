@@ -51,7 +51,7 @@ function load_mod -a mod_path
 	set count_before $mod_count
 	source "$mod_path_detect"
 	set loaded_mods $loaded_mods $mod_path
-	if test $loaded_mods_name = ''
+	if test "$loaded_mods_name" = ''
 		set loaded_mods_name $mod_name_on_loading
 	else
 		set loaded_mods_name $loaded_mods_name, $mod_name_on_loading
