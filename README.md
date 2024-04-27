@@ -1,4 +1,4 @@
-# Fish Mod Loader
+# Fish Mod Loader (FML)
 
 This is a simple mod loader for my own shell. I use this to manage my fish scripts.
 
@@ -12,6 +12,10 @@ See [FML Usage](document/simple_usage.md)
 
 See [FML Addition List](document/addition_list.md)
 
-## Mod Developing
+## Mod developing
 
 See [FML Mod Developing](document/mod_develop.md)
+
+## Example mods
+
+See [Examples](examples)
