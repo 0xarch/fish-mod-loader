@@ -1,6 +1,6 @@
 # Fish Mod Loader (FML)
 
-This is a simple mod loader for my own shell. I use this to manage my fish scripts.
+The Fish Mod Loader (FML) is a simple mod manager for fish written in fish for my own shell. It provides some functions for fish shell to manage FML mods.
 
 LICENSE: [GPL v2.0](LICENSE)
 

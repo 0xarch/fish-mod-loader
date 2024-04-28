@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fish mod loader</title>
+    <script type="module">
+        import { marked } from 'https://cdn.bootcdn.net/ajax/libs/marked/9.0.0/lib/marked.esm.js';
+        const loadMarkdown = async (path) => {
+            const resp = await fetch(path);
+            const text = await resp.text();
+            document.getElementById('main').innerHTML = marked.parse(text);
+            document.querySelectorAll('a').forEach(node => {
+                node.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    loadMarkdown(node.href);
+                });
+            });
+        };
+        document.addEventListener('DOMContentLoaded', () => {
+            loadMarkdown('README.md')
+        });
+        window.loadMarkdown = loadMarkdown;
+    </script>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <button onclick="loadMarkdown('README.md')">HOME</button>
+        </nav>
+    </header>
+    <main id="main">
+        <h1>Fish Mod Loader</h1>
+        <p>The Fish Mod Loader (FML) is a simple mod manager for fish written in fish. It provides some functions for
+            fish shell to manage FML mods.</p>
+    </main>
+    <footer>
+        Fish Mod Loader, FML, 2024 Soloev & 2024 0xarch.
+    </footer>
+</body>
+
+</html>

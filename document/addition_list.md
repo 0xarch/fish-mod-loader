@@ -19,15 +19,15 @@ This function will check whether the given mod is installed. If the loader find 
 
 ### define_mod $name
 
-See [FML Mod Developing](mod_develop.md)
+See [FML Mod Developing](document/mod_develop.md)
 
 ### set_mod_version $mod_version
 
-See [FML Mod Developing](mod_develop.md)
+See [FML Mod Developing](document/mod_develop.md)
 
 ### require_mod $name
 
-See [FML Mod Developing](mod_develop.md)
+See [FML Mod Developing](document/mod_develop.md)
 
 ## Aliases
 

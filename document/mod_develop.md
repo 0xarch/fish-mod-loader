@@ -11,11 +11,13 @@ It tells the loader the mod's name for human read, e.g. `Less Greeting`.
 It tells the loader the mod's version.  
 The default version string is `unknown`.
 
-### mod.require $name
+### mod.require $name $type?
 
 The loader will try to load the mod as `load_mod` do.
 
-When the mod is not found, it will return `1`.
+When the mod is not found, it will give a warning to user and return `1`.
+
+When the $type is 'optional', it will only return `1` and give no warning.
 
 ## Rules
 
@@ -36,29 +38,28 @@ A simple mod that changes the default greeting text.
 
 Thanks to Soloev.
 
-`less-greeting@soloev.fish`
+`fml-greeting@soloev.fish`
 ```fish
-# Mod: Less Greeting
-# Author: Soloev
-mod.name 'Less Greeting'
-mod.version '1.0'
+mod.name 'FML Greeting'
+mod.version '2.0'
 
 function fish_greeting
-    set_color green # Fish's Color setter function
-    echo "Fish Shell $FISH_VERSION"
-    echo "Fish Mod Loader $mod_loader_version"
-    set_color brgreen # brgreen -> Bright green
-    if test "$mod_loader_count" = '1'
-        echo "1 mod loaded."
-    else if test "$mod_loader_count" = '0'
-        echo "No mod loaded."
-    else
-        echo "$mod_loader_count mods loaded."
-    end
-    set_color normal
+	set_color green
+	echo "Fish Shell $version"
+	echo "Fish Mod Loader $mod_loader_version"
+	set_color brgreen
+	if test "$mod_loader_count" = 1
+		echo "1 mod loaded."
+	else if test "$mod_loader_count" = 0
+		set_color white
+		echo "No mod loaded."
+	else
+		echo "$mod_loader_count mods loaded."
+	end
+	set_color normal
 end
 ``` 
-> Copy this into your local file and load it
+> This mod is in the examples directory. add the example directory to finder and load `fml-greeting@soloev.fish`
 
 ### Example: Mod requiring
 
@@ -79,13 +80,28 @@ end
 mod.name 'Mod that requires another mod'
 mod.version '1.0'
 
+set ___mra_e_flag_opt_require 1
+
 if ! mod.require 'required-mod@example.fish'
     # The mod loader will automatically warn the user when a required mod is not loaded.
     return
 end
 
+if ! mod.require 'optional-mod@example.fish' optional
+    # Some fallback operations, like set flag.
+    set ___mra_e_flag_opt_require 0
+end
+
 # use functions provided by required mod
 required_function
+
+function some_function
+    if test "$___mra_e_flag_opt_require" = 1
+        optional_function
+    end
+    ...
+end
+
 ```
 
 If you load `mod-requires-another@example.fish`, you will see `Using required function.` before the greeting.
