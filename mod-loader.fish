@@ -82,17 +82,17 @@ function __fml_path_find \
     -d "BUILT-IN FUNCTION. DO NOT USE."
     if test -e "$mod_source_name"
         echo -n $mod_source_name
-        return 0
+        return
     else
         for path in (string split ' ' $mod_loader_finders)
             if test -e $path/$mod_source_name
                 echo -n "$path/$mod_source_name"
-                return 0
+                return
             end
         end # for
     end
     echo -n "$mod_source_name"
-    return 1
+    return
 end
 
 function mod_loader_warn
