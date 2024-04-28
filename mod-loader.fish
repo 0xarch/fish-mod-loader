@@ -1,5 +1,5 @@
 set mod_loader_count 0
-set mod_loader_version '2.0'
+set mod_loader_version '2.1'
 set mod_loader_finders
 
 # Map for managing mod
@@ -107,7 +107,6 @@ function add_mod_path -a preload_path
     set mod_loader_finders $preload_path $mod_loader_finders
 end
 
-
 function load_mod -a mod_source_name
     set __fml_m_name ''
     set __fml_m_version unknown
@@ -150,7 +149,7 @@ function mod.version -a mod_version
     set __fml_m_version $mod_version
 end
 
-function mod.require -a mod_source_name
+function mod.require -a mod_source_name -a optional
     set __fml_m_name ''
     set __fml_m_version unknown
     set mod_argv $argv[2..]
@@ -162,8 +161,10 @@ function mod.require -a mod_source_name
     end
     set mod_ab_path (__fml_path_find $mod_source_name)
     if test $status = 1
-        mod_loader_warn
-        echo "The mod <$__fml_m_name> requires mod <$mod_source_name> that cannot be loaded."
+        if test "$optional" != optional
+            mod_loader_warn
+            echo "The mod <$__fml_m_name> requires mod <$mod_source_name> that cannot be loaded."
+        end
         return 1
     end
     set mod_name_before $__fml_m_name
@@ -178,3 +179,6 @@ end
 ### Aliases
 
 alias fml_loaded_mods='echo $__fml_val_source'
+
+# why do we need this?
+alias ...='echo You are executing ... , which is a pre-defined function in Fish Mod Loader.'
