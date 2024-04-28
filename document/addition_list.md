@@ -2,6 +2,7 @@
 
 ## Functions
 
+
 ### add_mod_path $path
 
 This function defines path for the mod loader to find some mods when you don't want to write the absolute path for some modules in the same directory.
@@ -19,21 +20,27 @@ This function will check whether the given mod is installed. If the loader find 
 
 ### define_mod $name
 
-See [FML Mod Developing](document/mod_develop.md)
+See [FML Mod Developing](mod_develop.md)
 
 ### set_mod_version $mod_version
 
-See [FML Mod Developing](document/mod_develop.md)
+See [FML Mod Developing](mod_develop.md)
 
 ### require_mod $name
 
-See [FML Mod Developing](document/mod_develop.md)
+See [FML Mod Developing](mod_develop.md)
 
 ## Aliases
 
-## fml_loaded_mods
+### fml_loaded_mods
 
-`echo $__fml_val_source`
+alias => `echo $__fml_val_source`
+
+### ...
+
+A simple function for validate your mod.
+
+alias => `echo You are executing ... , which is a pre-defined function in Fish Mod Loader.`
 
 ## Envs
 
