@@ -1,6 +1,8 @@
 set mod_loader_count 0
-set mod_loader_version '2.1'
 set mod_loader_finders
+
+set fml_version '2.1'
+set mod_loader_version $fml_version
 
 # Map for managing mod
 # **NOTE** the index starts at 1 in fish
@@ -176,9 +178,21 @@ function mod.require -a mod_source_name -a optional
     __fml_push_to_map $mod_source_name $mod_name_before $mod_version_before $mod_ab_path
 end
 
+### FML command
+
+function fml -d 'Fish Mod Loader'
+	echo (color! green "Fish Mod Loader $fml_version")
+end
+
 ### Aliases
 
 alias fml_loaded_mods='echo $__fml_val_source'
+
+### Little functions
+
+function color! -a color -a text
+	echo (set_color $color)$text(set_color normal)
+end
 
 # why do we need this?
 alias ...='echo You are executing ... , which is a pre-defined function in Fish Mod Loader.'
